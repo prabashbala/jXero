@@ -3,12 +3,14 @@ jXero
 
 A simple Java library for the [Xero API](http://developer.xero.com/documentation/api/api-overview/).
 
+[Download latest version](http://softlysoftware.com/jxero/jxero-latest.zip)
+
 #### Easy to set up
 
 Drop the jar on your classpath and you can run code like this to connect:
 
     String consumerKey = "JDFSDKGEN4567DFS9987DFSF993222";
-    String consumerSecret = "JDFSDKGEN4567DFS9987DFSF993222";
+    String consumerSecret = "87DFSF993222JDFSDKGEN4567DFS99";
     File privateKeyFile = new File("/path/to/your/privatekey.pem");
     XeroClient xeroClient = new XeroClient(consumerKey, consumerSecret, privateKeyFile);
 
@@ -38,13 +40,20 @@ We've tried to make the core business objects you need to work with as simple as
 You won't need to use a FactoryObject to pre-process the due date on your invoice - just build
 like a normal bean and post through the client.
 
-### Actively Maintained by Friendly Team
+### Actively maintained and open for contributions
 
 Here at [Softly Software Ltd](http://softlysoftware.com) we use Xero every day to handle all the 
 transactions for our services. When it came time to plugin the servers to speak direct to our data
 we looked around and couldn't find quite the right wrapper - so we built this one.
 
 Bug reports, contributions and pull requests most welcome.
+
+### Dependencies
+
+ * [OAuth](https://code.google.com/p/oauth/)
+ * [Commons Logging](http://commons.apache.org/proper/commons-logging/)
+ * [Commons Codec](http://commons.apache.org/proper/commons-codec/)
+ * [Commons HttpClient](http://hc.apache.org/httpclient-3.x/)
 
 ### Frequently Asked Questions
 

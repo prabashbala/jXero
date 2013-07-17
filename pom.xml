@@ -12,6 +12,13 @@
         <developerConnection>scm:git:git@github.com:SoftlySoftware/jXero.git</developerConnection>
     </scm>
     <build>
+        <extensions>
+          <extension>
+             <groupId>org.apache.maven.wagon</groupId>
+             <artifactId>wagon-ssh</artifactId>
+             <version>1.0-beta-6</version>
+           </extension>
+         </extensions>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -68,6 +75,26 @@
                         <phase>none</phase>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>wagon-maven-plugin</artifactId>
+              <version>1.0-beta-3</version>
+              <configuration>
+                <serverId>jam</serverId>
+                <fromFile>${project.build.directory}/${project.build.finalName}-bin.zip</fromFile>
+                <toFile>jxero-latest.zip</toFile>
+                <url>scp://root@jam/sites/softlysoftware/www/jxero</url>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>upload-to-jam</id>
+                  <phase>deploy</phase>
+                  <goals>
+                    <goal>upload-single</goal>
+                  </goals>
+                </execution>
+              </executions>
             </plugin>
         </plugins>
     </build>
