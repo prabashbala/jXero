@@ -43,7 +43,9 @@ import net.oauth.client.httpclient3.HttpClient3;
 import com.softlysoftware.jxero.wrappers.Response;
 import com.softlysoftware.jxero.wrappers.Endpoint;
 import com.softlysoftware.jxero.wrappers.Contacts;
+import com.softlysoftware.jxero.wrappers.Invoices;
 import com.softlysoftware.jxero.core.Contact;
+import com.softlysoftware.jxero.core.Invoice;
 import com.softlysoftware.jxero.core.Address;
 import com.softlysoftware.jxero.core.Phone;
 import org.apache.commons.io.FileUtils;
@@ -193,7 +195,6 @@ public class XeroClient {
 		invoke(endpoint, Method.POST, null, OAuth.newList("xml", xml));
 	}
 
-
 	// ------------------- Contacts
 
 	/**
@@ -251,6 +252,26 @@ public class XeroClient {
 	public void postContact(Contact contact) {
 		Contacts endpoint = new Contacts();
 		endpoint.getList().add(contact);
+		post(endpoint);
+	}
+
+	// ------------------- Invoices
+
+	/**
+	* Either get a collection of Invoice objects, or build from scratch. Then call this method to update/add them to your Xero data.
+	*/
+	public void postInvoices(List<Invoice> invoices) {
+		Invoices endpoint = new Invoices();
+		endpoint.getList().addAll(invoices);
+		post(endpoint);
+	}
+
+	/**
+	* Grab a invoice via a get method, or build one from scratch to use this method to update/add it.
+	*/
+	public void postInvoice(Invoice invoice) {
+		Invoices endpoint = new Invoices();
+		endpoint.getList().add(invoice);
 		post(endpoint);
 	}
 

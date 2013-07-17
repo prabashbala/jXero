@@ -75,7 +75,7 @@ public class Invoice {
 		try {return DF.parse(dueDate);}
 		catch (ParseException e) {throw new RuntimeException(e);}
 	}
-	public void setDueDate(Date dueDate){this.date = DF.format(dueDate);}
+	public void setDueDate(Date dueDate){this.dueDate = DF.format(dueDate);}
 
 	@XmlElement(name = "InvoiceNumber")
 	private String invoiceNumber;
