@@ -1,0 +1,33 @@
+<assembly>
+	<id>bin</id>
+	<formats>
+		<format>tar.gz</format>
+		<format>zip</format>
+	</formats>
+	<fileSets>
+		<fileSet>
+			<includes>
+				<include>README*</include>
+				<include>LICENCE*</include>
+				<include>NOTICE*</include>
+				<include>jxero.oauth.properties</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>target</directory>
+			<includes>
+				<include>jxero-*.jar</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+	<dependencySets>
+	    <dependencySet>
+	        <excludes>
+	            <exclude>dependency:dependency</exclude>
+	        </excludes>
+	        <useProjectArtifact>false</useProjectArtifact>
+	        <useTransitiveDependencies>true</useTransitiveDependencies>
+            <outputDirectory>lib</outputDirectory>
+	    </dependencySet>
+	</dependencySets>
+</assembly>

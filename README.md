@@ -59,10 +59,3 @@ Bug reports, contributions and pull requests most welcome.
 
  * **What if a question isn't answered here?**
    Please get in touch. Email us at *jxero (that symbol) softlysoftware (that punctuation mark) com*
-
-
-
-
-
-
-
