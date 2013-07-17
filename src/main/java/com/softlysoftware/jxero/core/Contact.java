@@ -35,95 +35,102 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 public class Contact {
 
 	@XmlElement(name = "ContactID")
+	private String contactID;
 	public String getContactID(){return contactID;}
 	public void setContactID(String contactID){this.contactID = contactID;}
-	private String contactID;
 
 	@XmlElement(name = "ContactNumber")
+	private String contactNumber;
 	public String getContactNumber(){return contactNumber;}
 	public void setContactNumber(String contactNumber){this.contactNumber = contactNumber;}
-	private String contactNumber;
+
+	public enum Status {ACTIVE, DELETED};
 
 	@XmlElement(name = "ContactStatus")
-	public String getContactStatus(){return contactStatus;}
-	public void setContactStatus(String contactStatus){this.contactStatus = contactStatus;}
-	private String contactStatus;
+	private String status;
+	public Status getStatus(){
+		if (status == null) return null;
+		if (status.equals("ACTIVE")) return Status.ACTIVE;
+		if (status.equals("DELETED")) return Status.DELETED;
+		throw new RuntimeException("Bad status : " + status);
+	}
+	public void setStatus(Status status){this.status = status.toString();}
 
 	@XmlElement(name = "Name")
+	private String name;
 	public String getName(){return name;}
 	public void setName(String name){this.name = name;}
-	private String name;
 
 	@XmlElement(name = "FirstName")
+	private String firstName;
 	public String getFirstName(){return firstName;}
 	public void setFirstName(String firstName){this.firstName = firstName;}
-	private String firstName;
 
 	@XmlElement(name = "LastName")
+	private String lastName;
 	public String getLastName(){return lastName;}
 	public void setLastName(String lastName){this.lastName = lastName;}
-	private String lastName;
 
 	@XmlElement(name = "EmailAddress")
+	private String emailAddress;
 	public String getEmailAddress(){return emailAddress;}
 	public void setEmailAddress(String emailAddress){this.emailAddress = emailAddress;}
-	private String emailAddress;
 
 	@XmlElement(name = "SkypeUserName")
+	private String skypeUserName;
 	public String getSkypeUserName(){return skypeUserName;}
 	public void setSkypeUserName(String skypeUserName){this.skypeUserName = skypeUserName;}
-	private String skypeUserName;
 
 	@XmlElement(name = "BankAccountDetails")
+	private String bankAccountDetails;
 	public String getBankAccountDetails(){return bankAccountDetails;}
 	public void setBankAccountDetails(String bankAccountDetails){this.bankAccountDetails = bankAccountDetails;}
-	private String bankAccountDetails;
 
 	@XmlElement(name = "TaxNumber")
+	private String taxNumber;
 	public String getTaxNumber(){return taxNumber;}
 	public void setTaxNumber(String taxNumber){this.taxNumber = taxNumber;}
-	private String taxNumber;
 
 	@XmlElement(name = "AccountsReceivableTaxType")
+	private String accountsReceivableTypeType;
 	public String getAccountsReceivableTaxType(){return accountsReceivableTypeType;}
 	public void setAccountsReceivableTaxType(String accountsReceivableTypeType){this.accountsReceivableTypeType = accountsReceivableTypeType;}
-	private String accountsReceivableTypeType;
 
 	@XmlElement(name = "AccountsPayableTaxType")
+	private String accountsPayableTaxType;
 	public String getAccountsPayableTaxType(){return accountsPayableTaxType;}
 	public void setAccountsPayableTaxType(String accountsPayableTaxType){this.accountsPayableTaxType = accountsPayableTaxType;}
-	private String accountsPayableTaxType;
 
 	@XmlElement(name = "UpdatedDateUTC")
+	private String updatedDateUTC;
 	public String getUpdatedDateUTC(){return updatedDateUTC;}
 	public void setUpdatedDateUTC(String updatedDateUTC){this.updatedDateUTC = updatedDateUTC;}
-	private String updatedDateUTC;
 
 	@XmlElement(name = "IsSupplier")
-	public String getIsSupplier(){return isSupplier;}
-	public void setIsSupplier(String isSupplier){this.isSupplier = isSupplier;}
 	private String isSupplier;
+	public boolean getIsSupplier(){return isSupplier != null && isSupplier.equals("true");}
+	public void setIsSupplier(boolean isSupplier){this.isSupplier = isSupplier+"";}
 
 	@XmlElement(name = "IsCustomer")
-	public String getIsCustomer(){return isCustomer;}
-	public void setIsCustomer(String isCustomer){this.isCustomer = isCustomer;}
 	private String isCustomer;
+	public boolean getIsCustomer(){return isCustomer != null && isCustomer.equals("true");}
+	public void setIsCustomer(boolean isCustomer){this.isCustomer = isCustomer+"";}
 
 	@XmlElement(name = "DefaultCurrency")
+	private String defaultCurrency;
 	public String getDefaultCurrency(){return defaultCurrency;}
 	public void setDefaultCurrency(String defaultCurrency){this.defaultCurrency = defaultCurrency;}
-	private String defaultCurrency;
 
 	@XmlElementWrapper(name = "Addresses")
 	@XmlElement(name = "Address")
+	private List<Address> addresses = new LinkedList<Address>();
 	public List<Address> getAddresses() {return addresses;}
 	public void setAddresses(List<Address> addresses) {this.addresses = addresses;}
-	private List<Address> addresses = new LinkedList<Address>();
 
 	@XmlElementWrapper(name = "Phones")
 	@XmlElement(name = "Phone")
+	private List<Phone> phones = new LinkedList<Phone>();
 	public List<Phone> getPhones(){return phones;}
 	public void setPhones(List<Phone> phones){this.phones = phones;}
-	private List<Phone> phones = new LinkedList<Phone>();
 
 }

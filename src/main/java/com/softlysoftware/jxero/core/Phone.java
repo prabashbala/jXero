@@ -27,24 +27,33 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Phone {
 
+	public enum Type {DEFAULT, DDI, MOBILE, FAX}
+
 	@XmlElement(name = "PhoneType")
-	public String getPhoneType(){return phoneType;}
-	public void setPhoneType(String phoneType){this.phoneType = phoneType;}
-	private String phoneType;
+	private String type;
+	public Type getType() {
+		if (type == null) return null;
+		if (type.equals("DEFAULT")) return Type.DEFAULT;
+		if (type.equals("DDI")) return Type.DDI;
+		if (type.equals("MOBILE")) return Type.MOBILE;
+		if (type.equals("FAX")) return Type.FAX;
+		throw new RuntimeException("Bad type : " + type);
+	}
+	public void setType(Type type) {this.type = type.toString();}
 
 	@XmlElement(name = "PhoneNumber")
+	private String phoneNumber;
 	public String getPhoneNumber(){return phoneNumber;}
 	public void setPhoneNumber(String phoneNumber){this.phoneNumber = phoneNumber;}
-	private String phoneNumber;
 
 	@XmlElement(name = "PhoneAreaCode")
+	private String phoneAreaCode;
 	public String getPhoneAreaCode(){return phoneAreaCode;}
 	public void setPhoneAreaCode(String phoneAreaCode){this.phoneAreaCode = phoneAreaCode;}
-	private String phoneAreaCode;
 
 	@XmlElement(name = "PhoneCountryCode")
+	private String phoneCountryCode;
 	public String getPhoneCountryCode(){return phoneCountryCode;}
 	public void setPhoneCountryCode(String phoneCountryCode){this.phoneCountryCode = phoneCountryCode;}
-	private String phoneCountryCode;
 
 }

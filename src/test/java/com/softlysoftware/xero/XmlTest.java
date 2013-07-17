@@ -13,7 +13,7 @@ import com.softlysoftware.jxero.wrappers.Contacts;
 @RunWith(JUnit4.class)
 public class XmlTest {
 
-	private static String FRED_IN_LONDON = "<Contacts><Contact><Addresses><Address><City>London</City></Address></Addresses><Name>Fred</Name><Phones/></Contact></Contacts>";
+	private static String FRED_IN_LONDON = "<Contacts><Contact><Name>Fred</Name><Addresses><Address><City>London</City></Address></Addresses><Phones/></Contact></Contacts>";
 
 	@Test
 	public void testToXml() {

@@ -29,18 +29,19 @@ public class Invoice {
 
 	public enum Type {ACCPAY, ACCREC};
 
+	@XmlElement(name = "Type")
+	private String type;
 	public Type getType() {
+		if (type == null) return null;
 		if (type.equals("ACCPAY")) return Type.ACCPAY;
 		if (type.equals("ACCREC")) return Type.ACCREC;
 		throw new RuntimeException("Bad Invoice type : " + type);
 	}
 	public void setType(Type type) {this.type = type.toString();}
-	@XmlElement(name = "Type")
-	private String type;
 
 	@XmlElement(name = "Contact")
+	private Contact contact;
 	public Contact getContact(){return contact;}
 	public void setContact(Contact contact){this.contact = contact;}
-	private Contact contact;
 
 }
