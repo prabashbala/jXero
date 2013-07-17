@@ -18,10 +18,12 @@
  */
 package com.softlysoftware.jxero.core;
 
+import java.util.Date;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSchemaType;
 
 @XmlRootElement(name = "Invoice")
 @XmlAccessorType(XmlAccessType.NONE)
@@ -43,5 +45,10 @@ public class Invoice {
 	private Contact contact;
 	public Contact getContact(){return contact;}
 	public void setContact(Contact contact){this.contact = contact;}
+
+	@XmlElement(name = "Date")
+	private Date date;
+	public Date getDate(){return date;}
+	public void setDate(Date date){this.date = date;}
 
 }
