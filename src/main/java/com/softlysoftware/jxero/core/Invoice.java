@@ -19,6 +19,12 @@
 package com.softlysoftware.jxero.core;
 
 import java.util.Date;
+import java.util.TimeZone;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.text.NumberFormat;
+import java.text.DecimalFormat;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -28,6 +34,12 @@ import javax.xml.bind.annotation.XmlSchemaType;
 @XmlRootElement(name = "Invoice")
 @XmlAccessorType(XmlAccessType.NONE)
 public class Invoice {
+
+	// TODO - Parse using the Xero Account's timezone
+	private static SimpleDateFormat DF = new SimpleDateFormat("yyyy-MM-dd'T00:00:00'");
+	static {DF.setTimeZone(TimeZone.getTimeZone("UTC"));}
+
+	private static NumberFormat NF = new DecimalFormat("0.00");
 
 	public enum Type {ACCPAY, ACCREC};
 
@@ -47,8 +59,86 @@ public class Invoice {
 	public void setContact(Contact contact){this.contact = contact;}
 
 	@XmlElement(name = "Date")
-	private Date date;
-	public Date getDate(){return date;}
-	public void setDate(Date date){this.date = date;}
+	private String date;
+	public Date getDate(){
+		try {return DF.parse(date);}
+		catch (ParseException e) {throw new RuntimeException(e);}
+	}
+	public void setDate(Date date){this.date = DF.format(date);}
+
+	@XmlElement(name = "DueDate")
+	private String dueDate;
+	public Date getDueDate(){
+		try {return DF.parse(dueDate);}
+		catch (ParseException e) {throw new RuntimeException(e);}
+	}
+	public void setDueDate(Date dueDate){this.date = DF.format(dueDate);}
+
+	@XmlElement(name = "InvoiceNumber")
+	private String invoiceNumber;
+	public String getInvoiceNumber(){return invoiceNumber;}
+	public void setInvoiceNumber(String invoiceNumber){this.invoiceNumber = invoiceNumber;}
+
+	@XmlElement(name = "Reference")
+	private String reference;
+	public String getReference(){return reference;}
+	public void setReference(String reference){this.reference = reference;}
+
+	@XmlElement(name = "BrandingThemeID")
+	private String brandingThemeID;
+	public String getBrandingThemeID(){return brandingThemeID;}
+	public void setBrandingThemeID(String brandingThemeID){this.brandingThemeID = brandingThemeID;}
+
+	@XmlElement(name = "Url")
+	private String url;
+	public String getUrl(){return url;}
+	public void setUrl(String url){this.url = url;}
+
+	@XmlElement(name = "CurrencyCode")
+	private String currencyCode;
+	public String getCurrencyCode(){return currencyCode;}
+	public void setCurrencyCode(String currencyCode){this.currencyCode = currencyCode;}
+
+	public enum Status {DRAFT, SUBMITTED, AUTHORISED};
+
+	@XmlElement(name = "Status")
+	private String status;
+	public Status getStatus(){
+		if (status == null) return null;
+		if (status.equals("DRAFT")) return Status.DRAFT;
+		if (status.equals("SUBMITTED")) return Status.SUBMITTED;
+		if (status.equals("AUTHORISED")) return Status.AUTHORISED;
+		throw new RuntimeException("Bad status : " + status);
+	}
+	public void setStatus(Status status){this.status = status.toString();}
+
+	@XmlElement(name = "LineAmountTypes")
+	private String lineAmountTypes;
+	public String getLineAmountTypes(){return lineAmountTypes;}
+	public void setLineAmountTypes(String lineAmountTypes){this.lineAmountTypes = lineAmountTypes;}
+
+	@XmlElement(name = "SubTotal")
+	private String subTotal;
+	public double getSubTotal(){
+		try {return NF.parse(subTotal).doubleValue();}
+		catch (ParseException e) {throw new RuntimeException(e);}
+	}
+	public void setSubTotal(double subTotal){this.subTotal = NF.format(subTotal);} 
+
+	@XmlElement(name = "TotalTax")
+	private String totalTax;
+	public double getTotalTax(){
+		try {return NF.parse(totalTax).doubleValue();}
+		catch (ParseException e) {throw new RuntimeException(e);}
+	}
+	public void setTotalTax(double totalTax){this.totalTax = NF.format(totalTax);} 
+
+	@XmlElement(name = "Total")
+	private String total;
+	public double getTotal(){
+		try {return NF.parse(total).doubleValue();}
+		catch (ParseException e) {throw new RuntimeException(e);}
+	}
+	public void setTotal(double total){this.total = NF.format(total);} 
 
 }

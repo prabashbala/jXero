@@ -21,8 +21,8 @@ public class InvoiceTest {
     	Invoice invoice = invoices.getList().get(0);
     	assertEquals(invoice.getType(), Invoice.Type.ACCREC);
     	assertEquals("Ariki Properties", invoice.getContact().getName());
-    	// currently failing ...
-    	// assertEquals(1252368000000l, invoice.getDate().getTime());
+    	assertEquals(1252368000000l, invoice.getDate().getTime());
+        assertEquals(87.11d, invoice.getSubTotal(), 0);
     }
 
 }

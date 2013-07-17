@@ -100,6 +100,18 @@ public class Contact {
 	private String accountsPayableTaxType;
 	public String getAccountsPayableTaxType(){return accountsPayableTaxType;}
 	public void setAccountsPayableTaxType(String accountsPayableTaxType){this.accountsPayableTaxType = accountsPayableTaxType;}
+	
+	@XmlElementWrapper(name = "Addresses")
+	@XmlElement(name = "Address")
+	private List<Address> addresses = new LinkedList<Address>();
+	public List<Address> getAddresses() {return addresses;}
+	public void setAddresses(List<Address> addresses) {this.addresses = addresses;}
+
+	@XmlElementWrapper(name = "Phones")
+	@XmlElement(name = "Phone")
+	private List<Phone> phones = new LinkedList<Phone>();
+	public List<Phone> getPhones(){return phones;}
+	public void setPhones(List<Phone> phones){this.phones = phones;}
 
 	@XmlElement(name = "UpdatedDateUTC")
 	private String updatedDateUTC;
@@ -120,17 +132,5 @@ public class Contact {
 	private String defaultCurrency;
 	public String getDefaultCurrency(){return defaultCurrency;}
 	public void setDefaultCurrency(String defaultCurrency){this.defaultCurrency = defaultCurrency;}
-
-	@XmlElementWrapper(name = "Addresses")
-	@XmlElement(name = "Address")
-	private List<Address> addresses = new LinkedList<Address>();
-	public List<Address> getAddresses() {return addresses;}
-	public void setAddresses(List<Address> addresses) {this.addresses = addresses;}
-
-	@XmlElementWrapper(name = "Phones")
-	@XmlElement(name = "Phone")
-	private List<Phone> phones = new LinkedList<Phone>();
-	public List<Phone> getPhones(){return phones;}
-	public void setPhones(List<Phone> phones){this.phones = phones;}
 
 }

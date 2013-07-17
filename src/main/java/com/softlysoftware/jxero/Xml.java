@@ -43,7 +43,8 @@ public class Xml {
 			StringWriter stringWriter = new StringWriter();
 			JAXBContext jaxbContext = JAXBContext.newInstance(wrapper.getClass());
 			Marshaller marshaller = jaxbContext.createMarshaller();
-			marshaller.setProperty("jaxb.fragment", Boolean.TRUE);
+			marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+			//marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			marshaller.marshal(wrapper, stringWriter);
 			return stringWriter.toString();
 		} 

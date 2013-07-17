@@ -1,6 +1,7 @@
 package com.softlysoftware.jxero;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import java.io.IOException;
 import org.junit.Test;
 import org.junit.Ignore;
@@ -9,6 +10,8 @@ import org.junit.runners.JUnit4;
 import com.softlysoftware.jxero.core.Contact;
 import com.softlysoftware.jxero.wrappers.Contacts;
 import org.apache.commons.io.IOUtils;
+import org.xmlmatchers.XmlMatchers;
+import org.xmlmatchers.transform.XmlConverters;
 
 @RunWith(JUnit4.class)
 public class ContactTest {
@@ -24,6 +27,8 @@ public class ContactTest {
     	assertEquals("6011", contact.getAddresses().get(0).getPostalCode());
     	assertEquals(4, contact.getPhones().size());
     	assertEquals("1111111", contact.getPhones().get(0).getPhoneNumber());
+        String xmlBounced = Xml.toXml(contacts);
+        assertThat(XmlConverters.the(xml), XmlMatchers.isEquivalentTo(XmlConverters.the(xmlBounced)));
     }
 
 }
