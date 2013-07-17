@@ -20,6 +20,8 @@ package com.softlysoftware.jxero.core;
 
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.List;
+import java.util.LinkedList;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -29,6 +31,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlSchemaType;
 
 @XmlRootElement(name = "Invoice")
@@ -39,7 +42,7 @@ public class Invoice {
 	private static SimpleDateFormat DF = new SimpleDateFormat("yyyy-MM-dd'T00:00:00'");
 	static {DF.setTimeZone(TimeZone.getTimeZone("UTC"));}
 
-	private static NumberFormat NF = new DecimalFormat("0.00");
+	private static NumberFormat MONEY_FORMAT = new DecimalFormat("0.00");
 
 	public enum Type {ACCPAY, ACCREC};
 
@@ -120,25 +123,31 @@ public class Invoice {
 	@XmlElement(name = "SubTotal")
 	private String subTotal;
 	public double getSubTotal(){
-		try {return NF.parse(subTotal).doubleValue();}
+		try {return MONEY_FORMAT.parse(subTotal).doubleValue();}
 		catch (ParseException e) {throw new RuntimeException(e);}
 	}
-	public void setSubTotal(double subTotal){this.subTotal = NF.format(subTotal);} 
+	public void setSubTotal(double subTotal){this.subTotal = MONEY_FORMAT.format(subTotal);} 
 
 	@XmlElement(name = "TotalTax")
 	private String totalTax;
 	public double getTotalTax(){
-		try {return NF.parse(totalTax).doubleValue();}
+		try {return MONEY_FORMAT.parse(totalTax).doubleValue();}
 		catch (ParseException e) {throw new RuntimeException(e);}
 	}
-	public void setTotalTax(double totalTax){this.totalTax = NF.format(totalTax);} 
+	public void setTotalTax(double totalTax){this.totalTax = MONEY_FORMAT.format(totalTax);} 
 
 	@XmlElement(name = "Total")
 	private String total;
 	public double getTotal(){
-		try {return NF.parse(total).doubleValue();}
+		try {return MONEY_FORMAT.parse(total).doubleValue();}
 		catch (ParseException e) {throw new RuntimeException(e);}
 	}
-	public void setTotal(double total){this.total = NF.format(total);} 
+	public void setTotal(double total){this.total = MONEY_FORMAT.format(total);}
+
+	@XmlElementWrapper(name = "LineItems")
+	@XmlElement(name = "LineItem")
+	private List<LineItem> lineItems = new LinkedList<LineItem>();
+	public List<LineItem> getLineItems(){return lineItems;}
+	public void setLineItems(List<LineItem> lineItems){this.lineItems = lineItems;}
 
 }
