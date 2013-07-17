@@ -3,7 +3,7 @@
     <groupId>com.softlysoftware.jxero</groupId>
     <artifactId>jxero</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>jXero</name>
     <url>https://github.com/SoftlySoftware/jXero</url>
     <scm>
