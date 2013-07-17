@@ -54,6 +54,7 @@ Bug reports, contributions and pull requests most welcome.
  * [Commons Logging](http://commons.apache.org/proper/commons-logging/)
  * [Commons Codec](http://commons.apache.org/proper/commons-codec/)
  * [Commons HttpClient](http://hc.apache.org/httpclient-3.x/)
+ * [Commons IO](http://commons.apache.org/proper/commons-io/)
 
 ### Frequently Asked Questions
 

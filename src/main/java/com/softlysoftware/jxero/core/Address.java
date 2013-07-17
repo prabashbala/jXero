@@ -29,7 +29,7 @@ public class Address {
 
 	@XmlElement(name = "AddressType")
 	public String getAddressType() {return addressType;}
-	public void setAddressType() {this.addressType = addressType;}
+	public void setAddressType(String addressType) {this.addressType = addressType;}
 	private String addressType;
 
 	@XmlElement(name = "AddressLine1")
@@ -61,6 +61,11 @@ public class Address {
 	public String getPostalCode(){return postalCode;}
 	public void setPostalCode(String postalCode){this.postalCode = postalCode;}
 	private String postalCode;
+
+	@XmlElement(name = "Country")
+	public String getCountry(){return country;}
+	public void setCountry(String country){this.country = country;}
+	private String country;
 
 	@XmlElement(name = "AttentionTo")
 	public String getAttentionTo(){return attentionTo;}

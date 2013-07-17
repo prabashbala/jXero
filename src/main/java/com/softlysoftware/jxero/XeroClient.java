@@ -46,7 +46,7 @@ import com.softlysoftware.jxero.wrappers.Contacts;
 import com.softlysoftware.jxero.core.Contact;
 import com.softlysoftware.jxero.core.Address;
 import com.softlysoftware.jxero.core.Phone;
-
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -82,7 +82,7 @@ public class XeroClient {
 	*/
 	public XeroClient(String consumerKey, String consumerSecret, File privateKeyFile) {
 		try {
-			String privateKey = grabStringFromFile(privateKeyFile);
+			String privateKey =  FileUtils.readFileToString(privateKeyFile, "ISO-8859-1");
 			setupOAuth(consumerKey, consumerSecret, privateKey);
 		}
 		catch (IOException e) {
@@ -112,7 +112,7 @@ public class XeroClient {
 			// two ways to pass in the private key
 			if (properties.getProperty("jxero.oauth.pem.file") != null) {
 				// state the location in the properties file
-				privateKey = grabStringFromFile(new File(properties.getProperty("jxero.oauth.pem.file")));
+				privateKey = FileUtils.readFileToString(new File(properties.getProperty("jxero.oauth.pem.file")), "ISO-8859-1");
 			}
 			else {
 				// or the correctly named file on the classpath
@@ -137,15 +137,6 @@ public class XeroClient {
 		oAuthAccessor = new OAuthAccessor(consumer);
 		oAuthAccessor.accessToken = consumerKey;
 		oAuthAccessor.tokenSecret = consumerSecret;
-	}
-
-	private String grabStringFromFile(File file) throws IOException {
-		BufferedReader in = new BufferedReader(new FileReader(file));
-		String line = null;
-		String privateKey = "";
-		while ((line = in.readLine()) != null) privateKey = privateKey + line + "\n";
-		in.close();
-		return privateKey;
 	}
 
 	/**

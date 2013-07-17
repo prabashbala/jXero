@@ -39,6 +39,11 @@ public class Contact {
 	public void setContactID(String contactID){this.contactID = contactID;}
 	private String contactID;
 
+	@XmlElement(name = "ContactNumber")
+	public String getContactNumber(){return contactNumber;}
+	public void setContactNumber(String contactNumber){this.contactNumber = contactNumber;}
+	private String contactNumber;
+
 	@XmlElement(name = "ContactStatus")
 	public String getContactStatus(){return contactStatus;}
 	public void setContactStatus(String contactStatus){this.contactStatus = contactStatus;}

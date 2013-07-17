@@ -1,2 +1,3 @@
 target
-credentials
+src/test/resources/jxero.oauth.properties
+src/test/resources/jxero.oauth.pem
