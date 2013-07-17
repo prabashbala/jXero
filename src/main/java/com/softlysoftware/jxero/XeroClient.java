@@ -212,7 +212,7 @@ public class XeroClient {
 	* @return Either the matching Contact, or null when no match is found.
 	*/
 	public Contact getContact(String identifier) {
-	    List<Contact> build = get(new Contacts(), identifier, null).Contacts.list;
+	    List<Contact> build = get(new Contacts(), identifier, null).Contacts.getList();
 		if (build.size() == 0) return null;
 		if (build.size() > 1) throw new RuntimeException("Multiple contacts with the same identifier : " + identifier);
 		return build.get(0);
@@ -223,7 +223,7 @@ public class XeroClient {
 	* See <a href="http://developer.xero.com/documentation/getting-started/http-requests-and-responses/">the Xero documentation</a> for full details.
 	*/
 	public List<Contact> getContactsWhere(String where) {
-		return get(new Contacts(), null, OAuth.newList("where", where)).Contacts.list;
+		return get(new Contacts(), null, OAuth.newList("where", where)).Contacts.getList();
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class XeroClient {
 	*/
 	public void postContacts(List<Contact> contacts) {
 		Contacts endpoint = new Contacts();
-		endpoint.list.addAll(contacts);
+		endpoint.getList().addAll(contacts);
 		post(endpoint);
 	}
 
@@ -259,7 +259,7 @@ public class XeroClient {
 	*/
 	public void postContact(Contact contact) {
 		Contacts endpoint = new Contacts();
-		endpoint.list.add(contact);
+		endpoint.getList().add(contact);
 		post(endpoint);
 	}
 

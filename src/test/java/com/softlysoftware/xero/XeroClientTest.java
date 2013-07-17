@@ -51,7 +51,7 @@ public class XeroClientTest {
 		String name = properties.getProperty("jxero.test.contact.name");
 		if (email == null || email.equals("test@example.com") || name == null || name.equals("Test Inc")) return;
 		XeroClient client = new XeroClient(true);
-		Assert.assertEquals(name, client.getContactByEmailAddress(email).Name);
+		Assert.assertEquals(name, client.getContactByEmailAddress(email).getName());
 	}
 
 

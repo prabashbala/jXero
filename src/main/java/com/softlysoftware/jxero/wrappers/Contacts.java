@@ -32,6 +32,7 @@ import com.softlysoftware.jxero.XeroClient.Method;
 * A simple wrapper for the list of Contact objects, to give the correct structure to the XML files.
 */
 @XmlRootElement(name = "Contacts")
+@XmlAccessorType(XmlAccessType.NONE)
 public class Contacts extends Endpoint {
 
 	/**
@@ -45,6 +46,8 @@ public class Contacts extends Endpoint {
 	* When working with this wrapper directly, add the subordiate Contact objects to this list.
 	*/
 	@XmlElement(name = "Contact")
-	public List<Contact> list = new LinkedList<Contact>();
+	public List<Contact> getList(){return list;}
+	public void setList(List<Contact> list){this.list = list;}
+	private List<Contact> list = new LinkedList<Contact>();
 
 }

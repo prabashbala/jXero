@@ -24,11 +24,27 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 @XmlRootElement(name = "Phone")
+@XmlAccessorType(XmlAccessType.NONE)
 public class Phone {
 
-	public String PhoneType;
-	public String PhoneNumber;
-	public String PhoneAreaCode;
-	public String PhoneCountryCode;
+	@XmlElement(name = "PhoneType")
+	public String getPhoneType(){return phoneType;}
+	public void setPhoneType(String phoneType){this.phoneType = phoneType;}
+	private String phoneType;
+
+	@XmlElement(name = "PhoneNumber")
+	public String getPhoneNumber(){return phoneNumber;}
+	public void setPhoneNumber(String phoneNumber){this.phoneNumber = phoneNumber;}
+	private String phoneNumber;
+
+	@XmlElement(name = "PhoneAreaCode")
+	public String getPhoneAreaCode(){return phoneAreaCode;}
+	public void setPhoneAreaCode(String phoneAreaCode){this.phoneAreaCode = phoneAreaCode;}
+	private String phoneAreaCode;
+
+	@XmlElement(name = "PhoneCountryCode")
+	public String getPhoneCountryCode(){return phoneCountryCode;}
+	public void setPhoneCountryCode(String phoneCountryCode){this.phoneCountryCode = phoneCountryCode;}
+	private String phoneCountryCode;
 
 }
