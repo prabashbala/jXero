@@ -129,11 +129,11 @@ public class XeroClient {
 	/**
 	* Convenience method - just instantiates a new ContactsEndpoint using this.
 	*/
-	public ContactsEndpoint getContactsEndpoint() {return new ContactsEndpoint(this);}
+	public ContactsEndpoint contacts() {return new ContactsEndpoint(this);}
 
 	/**
 	* Convenience method - just instantiates a new InvoicesEndpoint using this.
 	*/
-	public InvoicesEndpoint getInvoicesEndpoint() {return new InvoicesEndpoint(this);}
+	public InvoicesEndpoint invoices() {return new InvoicesEndpoint(this);}
 
 }

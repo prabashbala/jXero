@@ -12,26 +12,32 @@ Drop the jar on your classpath and you can run code like this to connect:
     String consumerKey = "JDFSDKGEN4567DFS9987DFSF993222";
     String consumerSecret = "87DFSF993222JDFSDKGEN4567DFS99";
     File privateKeyFile = new File("/path/to/your/privatekey.pem");
-    XeroClient xeroClient = new XeroClient(consumerKey, consumerSecret, privateKeyFile);
+    XeroClient xero = new XeroClient(consumerKey, consumerSecret, privateKeyFile);
 
-Or include a simple properties file alongside the jar for one line setup:
+Or include a properties file alongside the jar for one line setup:
 
-    XeroClient xeroClient = new XeroClient(true);
+    XeroClient xero = new XeroClient(true);
+
+Then use the method named after the Xero endpoint you want to use:
+
+    Contact contact = xero.contacts().getContactByEmailAddress("test@example.com");
+    Invoice invoice = xero.invoices().getInvoiceByNumber("INV-0001");
 
 #### Create a contact
 
     Contact contact = new Contact();
-    contact.Name = "Acme Ltd";
-    contact.EmailAddress = "acme@example.com";
+    contact.setName("Acme Ltd");
+    contact.setEmailAddress("acme@example.com");
 
-    xeroClient.getContactsEndpoint().post(contact);
+    xero.contacts().post(contact);
 
 #### Grab a list of contacts
 
-	List<Contact> contacts = xeroClient.getContactsEndpoint().getContactsWhere("EmailAddress.endsWith(\"gmail.com\")");
-	for (Contact contact : contacts) {
-		System.out.println(contact.getEmailAddress());
-	}
+    String w = "EmailAddress.endsWith(\"gmail.com\")";
+    List<Contact> contacts = xero.contacts().getContactsWhere(w);
+    for (Contact contact : contacts) {
+        System.out.println(contact.getEmailAddress());
+    }
 
 ### No JAXB generated classes
 
