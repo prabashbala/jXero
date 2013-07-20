@@ -20,8 +20,8 @@ Or include a properties file alongside the jar for one line setup:
 
 Then use the method named after the Xero endpoint you want to use:
 
-    Contact contact = xero.contacts().getContactByEmailAddress("test@example.com");
-    Invoice invoice = xero.invoices().getInvoiceByNumber("INV-0001");
+    Contact contact = xero.contacts().getByEmailAddress("test@example.com");
+    Invoice invoice = xero.invoices().getByNumber("INV-0001");
 
 #### Create a contact
 
