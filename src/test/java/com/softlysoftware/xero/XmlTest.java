@@ -9,7 +9,7 @@ import com.softlysoftware.jxero.Xml;
 import com.softlysoftware.jxero.XeroClient;
 import com.softlysoftware.jxero.core.Address;
 import com.softlysoftware.jxero.core.Contact;
-import com.softlysoftware.jxero.wrappers.Contacts;
+import com.softlysoftware.jxero.ContactsEndpoint;
 
 @RunWith(JUnit4.class)
 public class XmlTest {
@@ -23,7 +23,7 @@ public class XmlTest {
 		Address address = new Address();
 		address.setCity("London");
 		contact.getAddresses().add(address);
-		Contacts contacts = new Contacts(new XeroClient("a", "b", "c"));
+		ContactsEndpoint contacts = new ContactsEndpoint(new XeroClient("a", "b", "c"));
 		contacts.getList().add(contact);
 		String xml = Xml.toXml(contacts);
 		assertEquals("XML doesn't match.", FRED_IN_LONDON, xml);
@@ -31,7 +31,7 @@ public class XmlTest {
 
     @Test
     public void testFromXml() {
-    	Contacts contacts = (Contacts)Xml.fromXml(FRED_IN_LONDON, Contacts.class);
+    	ContactsEndpoint contacts = (ContactsEndpoint)Xml.fromXml(FRED_IN_LONDON, ContactsEndpoint.class);
     	assertEquals("Wrong number of contacts in list.", 1, contacts.getList().size());
     	Contact contact = contacts.getList().get(0);
     	assertEquals("Wrong number name for contact.", "Fred", contact.getName());

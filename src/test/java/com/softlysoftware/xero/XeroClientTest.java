@@ -11,7 +11,7 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import com.softlysoftware.jxero.XeroClient;
-import com.softlysoftware.jxero.wrappers.Contacts;
+import com.softlysoftware.jxero.ContactsEndpoint;
 
 @RunWith(JUnit4.class)
 public class XeroClientTest {
@@ -37,7 +37,7 @@ public class XeroClientTest {
 		String name = properties.getProperty("jxero.test.contact.name");
 		if (email == null || email.equals("test@example.com") || name == null || name.equals("Test Inc")) return;
 		XeroClient client = new XeroClient(true);
-		Contacts contacts = new Contacts(client);
+		ContactsEndpoint contacts = new ContactsEndpoint(client);
 		Assert.assertEquals(name, contacts.getByEmailAddress(email).getName());
 	}
 

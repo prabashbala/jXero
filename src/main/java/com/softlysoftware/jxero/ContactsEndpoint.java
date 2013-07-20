@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.softlysoftware.jxero.wrappers;
+package com.softlysoftware.jxero;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -33,11 +33,15 @@ import com.softlysoftware.jxero.XeroClient;
 */
 @XmlRootElement(name = "Contacts")
 @XmlAccessorType(XmlAccessType.NONE)
-public class Contacts extends Endpoint {
+public class ContactsEndpoint extends Endpoint {
 
-	private Contacts() { }
+	private ContactsEndpoint() { }
 
-	public Contacts(XeroClient xeroClient) {this.xeroClient = xeroClient;}
+	public ContactsEndpoint(XeroClient xeroClient) {this.xeroClient = xeroClient;}
+
+	public String getRootElementName() {
+		return "Contacts";
+	}
 
 	/**
 	* When working with this wrapper directly, add the subordiate Contact objects to this list.

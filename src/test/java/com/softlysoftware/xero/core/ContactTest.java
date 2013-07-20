@@ -8,7 +8,7 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import com.softlysoftware.jxero.core.Contact;
-import com.softlysoftware.jxero.wrappers.Contacts;
+import com.softlysoftware.jxero.ContactsEndpoint;
 import org.apache.commons.io.IOUtils;
 import org.xmlmatchers.XmlMatchers;
 import org.xmlmatchers.transform.XmlConverters;
@@ -19,7 +19,7 @@ public class ContactTest {
     @Test
     public void testFromXml() throws IOException {
     	String xml = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("Contacts.xml"), "UTF-8");
-    	Contacts contacts = (Contacts)Xml.fromXml(xml, Contacts.class);
+    	ContactsEndpoint contacts = (ContactsEndpoint)Xml.fromXml(xml, ContactsEndpoint.class);
     	assertEquals(1, contacts.getList().size());
     	Contact contact = contacts.getList().get(0);
     	assertEquals(Contact.Status.ACTIVE, contact.getStatus());

@@ -16,15 +16,28 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.softlysoftware.jxero.wrappers;
+package com.softlysoftware.jxero;
+
+import java.util.List;
+import java.util.LinkedList;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 /**
-* Something that can be marshelled/unmarshalled to XML.
+* Corresponds to the root element on the XML repsonses to API calls.
 */
-public abstract class Wrapper {
+@XmlRootElement(name = "Response")
+public class Response extends Wrapper {
 
-	public String getRootElementName() {
-		return getClass().getSimpleName();
-	}
+    public String Id;
+    public String Status;
+    public String ProviderName;
+    public String DateTimeUTC;
+    public ContactsEndpoint Contacts;
+    public InvoicesEndpoint Invoices;
+    // public Account Accounts;
 
 }

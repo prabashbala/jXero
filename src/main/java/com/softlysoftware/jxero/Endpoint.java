@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.softlysoftware.jxero.wrappers;
+package com.softlysoftware.jxero;
 
 import java.util.List;
 import java.io.IOException;
@@ -43,6 +43,8 @@ public abstract class Endpoint extends Wrapper {
 	protected XeroClient xeroClient;
 
 	private enum Method {GET, POST, PUT};
+
+	public abstract String getRootElementName();
 
 	private String invoke(Method method, String identifier, List<OAuth.Parameter> params) {
 		try {
@@ -71,6 +73,7 @@ public abstract class Endpoint extends Wrapper {
 			throw new RuntimeException("Something went wrong connecting to the service.", ioe);
 		}
 		catch (OAuthException oae) {
+			//oae.printStackTrace();
 			throw new RuntimeException("Something went wrong with the OAuth connection.", oae);
 		}
 	}

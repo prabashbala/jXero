@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import com.softlysoftware.jxero.core.Invoice;
 import com.softlysoftware.jxero.core.LineItem;
-import com.softlysoftware.jxero.wrappers.Invoices;
+import com.softlysoftware.jxero.InvoicesEndpoint;
 import org.apache.commons.io.IOUtils;
 import org.xmlmatchers.XmlMatchers;
 import org.xmlmatchers.transform.XmlConverters;
@@ -20,7 +20,7 @@ public class InvoiceTest {
     @Test
     public void testFromXml() throws IOException {
     	String xml = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("Invoices.xml"), "UTF-8");
-    	Invoices invoices = (Invoices)Xml.fromXml(xml, Invoices.class);
+    	InvoicesEndpoint invoices = (InvoicesEndpoint)Xml.fromXml(xml, InvoicesEndpoint.class);
     	assertEquals(invoices.getList().size(), 1);
     	Invoice invoice = invoices.getList().get(0);
     	assertEquals(invoice.getType(), Invoice.Type.ACCREC);

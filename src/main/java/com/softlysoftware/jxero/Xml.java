@@ -26,7 +26,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-import com.softlysoftware.jxero.wrappers.Wrapper;
+import com.softlysoftware.jxero.Wrapper;
 
 /**
 * Helper class to encapsulate the messy business of going to and from the XML.
