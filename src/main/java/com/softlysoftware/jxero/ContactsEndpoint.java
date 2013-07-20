@@ -56,7 +56,7 @@ public class ContactsEndpoint extends Endpoint {
 	*/
 	public Contact getById(String id) {
 		Response response = get(id, null);
-		return response.Contacts.list.get(0);
+		return response.getContactsEndpoint().list.get(0);
 	}
 
 	/**
@@ -65,7 +65,8 @@ public class ContactsEndpoint extends Endpoint {
 	*/
 	public List<Contact> getContactsWhere(String where) {
 		Response response = getWhere(where);
-		return response.Contacts.getList();
+		if (response.getContactsEndpoint() == null) return new LinkedList<Contact>();
+		return response.getContactsEndpoint().getList();
 	}
 
 	/**

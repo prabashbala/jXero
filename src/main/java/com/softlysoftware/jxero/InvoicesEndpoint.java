@@ -56,7 +56,7 @@ public class InvoicesEndpoint extends Endpoint {
 	*/
 	public Invoice getById(String id) {
 		Response response = get(id, null);
-		return response.Invoices.list.get(0);
+		return response.getInvoicesEndpoint().list.get(0);
 	}
 
 	/**
@@ -65,7 +65,8 @@ public class InvoicesEndpoint extends Endpoint {
 	*/
 	public List<Invoice> getInvoicesWhere(String where) {
 		Response response = getWhere(where);
-		return response.Invoices.getList();
+		if (response.getInvoicesEndpoint() == null) return new LinkedList<Invoice>();
+		return response.getInvoicesEndpoint().getList();
 	}
 
 	/**

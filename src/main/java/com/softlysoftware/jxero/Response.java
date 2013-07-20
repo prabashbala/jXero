@@ -30,14 +30,38 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 * Corresponds to the root element on the XML repsonses to API calls.
 */
 @XmlRootElement(name = "Response")
+@XmlAccessorType(XmlAccessType.NONE)
 public class Response extends Wrapper {
 
-    public String Id;
-    public String Status;
-    public String ProviderName;
-    public String DateTimeUTC;
-    public ContactsEndpoint Contacts;
-    public InvoicesEndpoint Invoices;
-    // public Account Accounts;
+	@XmlElement(name = "Id")
+	public String getId() {return id;}
+	public void setId(String id) {this.id = id;}
+	private String id;
+
+	@XmlElement(name = "Statis")
+	private String status;
+	public String getStatis(){return status;}
+	public void setStatis(String status){this.status = status;}
+
+	@XmlElement(name = "ProviderName")
+	private String providerName;
+	public String getProviderName(){return providerName;}
+	public void setProviderName(String providerName){this.providerName = providerName;}
+
+	@XmlElement(name = "DateTimeUTC")
+	private String dateTimeUTC;
+	public String getDateTimeUTC(){return dateTimeUTC;}
+	public void setDateTimeUTC(String dateTimeUTC){this.dateTimeUTC = dateTimeUTC;}
+
+	@XmlElement(name = "Contacts")
+	public ContactsEndpoint getContactsEndpoint() {return contactsEndpoint;}
+	public void setContactsEndpoint(ContactsEndpoint contactsEndpoint) {this.contactsEndpoint = contactsEndpoint;}
+	private ContactsEndpoint contactsEndpoint;
+
+	@XmlElement(name = "Invoices")
+	private InvoicesEndpoint invoicesEndPoint;
+	public InvoicesEndpoint getInvoicesEndpoint(){return invoicesEndPoint;}
+	public void setInvoicesEndpoint(InvoicesEndpoint invoicesEndPoint){this.invoicesEndPoint = invoicesEndPoint;}
+	private InvoicesEndpoint invoicesEndpoint;
 
 }
