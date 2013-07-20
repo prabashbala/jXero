@@ -90,7 +90,7 @@ public class InvoicesEndpoint extends Endpoint {
 	/**
 	* Either get a collection of Invoice objects, or build from scratch. Then call this method to update/add them to your Xero data.
 	*/
-	public void postInvoices(List<Invoice> invoices) {
+	public void post(List<Invoice> invoices) {
 		list = invoices;
 		post();
 	}
@@ -98,7 +98,7 @@ public class InvoicesEndpoint extends Endpoint {
 	/**
 	* Grab a invoice via a get method, or build one from scratch to use this method to update/add it.
 	*/
-	public void postInvoice(Invoice invoice) {
+	public void post(Invoice invoice) {
 		list = new LinkedList<Invoice>();
 		list.add(invoice);
 		post();

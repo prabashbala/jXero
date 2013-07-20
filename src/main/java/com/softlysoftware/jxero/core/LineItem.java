@@ -82,4 +82,9 @@ public class LineItem {
 	public String getAccountCode(){return accountCode;}
 	public void setAccountCode(String accountCode){this.accountCode = accountCode;}
 
+	@XmlElement(name = "ItemCode")
+	private String itemCode;
+	public String getItemCode(){return itemCode;}
+	public void setItemCode(String itemCode){this.itemCode = itemCode;}
+
 }
