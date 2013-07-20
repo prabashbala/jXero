@@ -21,20 +21,6 @@ public class XeroClientTest {
 		new XeroClient(false);
 	}
 
-	@Test
-	public void testMethods() {
-		Contacts contacts = new Contacts();
-		Assert.assertTrue(contacts.supportsMethod(XeroClient.Method.GET));
-		Assert.assertTrue(contacts.supportsMethod(XeroClient.Method.POST));
-		Assert.assertTrue(contacts.supportsMethod(XeroClient.Method.PUT));
-		/*
-		Accounts accounts = new Accounts();
-		assertTrue(accounts.supportsMethod(XeroClient.Method.GET));
-		assertFalse(accounts.supportsMethod(XeroClient.Method.POST));
-		assertFalse(accounts.supportsMethod(XeroClient.Method.PUT));
-		*/
-	}
-
 	/**
 	* This one relies on the a set of OAuth credentials being available
 	* on the classpath, along with some test data as described in the properties
@@ -51,7 +37,8 @@ public class XeroClientTest {
 		String name = properties.getProperty("jxero.test.contact.name");
 		if (email == null || email.equals("test@example.com") || name == null || name.equals("Test Inc")) return;
 		XeroClient client = new XeroClient(true);
-		Assert.assertEquals(name, client.getContactByEmailAddress(email).getName());
+		Contacts contacts = new Contacts(client);
+		Assert.assertEquals(name, contacts.getByEmailAddress(email).getName());
 	}
 
 

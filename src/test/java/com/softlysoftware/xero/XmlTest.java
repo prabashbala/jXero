@@ -6,6 +6,7 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import com.softlysoftware.jxero.Xml;
+import com.softlysoftware.jxero.XeroClient;
 import com.softlysoftware.jxero.core.Address;
 import com.softlysoftware.jxero.core.Contact;
 import com.softlysoftware.jxero.wrappers.Contacts;
@@ -22,7 +23,7 @@ public class XmlTest {
 		Address address = new Address();
 		address.setCity("London");
 		contact.getAddresses().add(address);
-		Contacts contacts = new Contacts();
+		Contacts contacts = new Contacts(new XeroClient("a", "b", "c"));
 		contacts.getList().add(contact);
 		String xml = Xml.toXml(contacts);
 		assertEquals("XML doesn't match.", FRED_IN_LONDON, xml);

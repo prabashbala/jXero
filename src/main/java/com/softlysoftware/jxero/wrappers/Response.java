@@ -37,6 +37,7 @@ public class Response extends Wrapper {
     public String ProviderName;
     public String DateTimeUTC;
     public Contacts Contacts;
+    public Invoices Invoices;
     // public Account Accounts;
 
 }

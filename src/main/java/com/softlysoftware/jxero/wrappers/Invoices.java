@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import com.softlysoftware.jxero.core.Invoice;
-import com.softlysoftware.jxero.XeroClient.Method;
+import com.softlysoftware.jxero.XeroClient;
 
 /**
 * A simple wrapper for the list of Contact objects, to give the correct structure to the XML files.
@@ -35,12 +35,9 @@ import com.softlysoftware.jxero.XeroClient.Method;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Invoices extends Endpoint {
 
-	/**
-	* Invoices supports all three kinds of method.
-	*/
-	public boolean supportsMethod(Method method) {
-		return true;
-	}
+	private Invoices() { }
+
+	public Invoices(XeroClient xeroClient) {this.xeroClient = xeroClient;}
 
 	/**
 	* When working with this wrapper directly, add the subordiate Invoice objects to this list.
@@ -49,5 +46,58 @@ public class Invoices extends Endpoint {
 	public List<Invoice> getList(){return list;}
 	public void setList(List<Invoice> list){this.list = list;}
 	private List<Invoice> list = new LinkedList<Invoice>();
+
+	/**
+	* The Xero maintained unique identifier. Will throw an exception if no match is found.
+	*/
+	public Invoice getById(String id) {
+		Response response = get(id, null);
+		return response.Invoices.list.get(0);
+	}
+
+	/**
+	* Grab invoices using any "where" filter. 
+	* See <a href="http://developer.xero.com/documentation/getting-started/http-requests-and-responses/">the Xero documentation</a> for full details.
+	*/
+	public List<Invoice> getInvoicesWhere(String where) {
+		Response response = getWhere(where);
+		return response.Invoices.getList();
+	}
+
+	/**
+	* Like the generalised getInvoicesWhere, but for convenience when you expect just one object to be returned in the set.
+	* Throws an exception when there's more than one match.
+	* @return If no match is found, returns null.
+	*/
+	public Invoice getInvoiceWhere(String where) {
+		List<Invoice> invoices = getInvoicesWhere(where);
+		if (invoices.size() == 0) return null;
+		if (invoices.size() > 1) throw new RuntimeException("Multiple (" + invoices.size() + ") invoices matched : " + where);
+		return invoices.get(0);
+	}
+
+	/**
+	* This is the unqiue identifier on your side.
+	*/
+	public Invoice getByNumber(String number) {
+		return getInvoiceWhere("InvoiceNumber =  \"" + number + "\"");
+	}
+
+	/**
+	* Either get a collection of Invoice objects, or build from scratch. Then call this method to update/add them to your Xero data.
+	*/
+	public void postInvoices(List<Invoice> invoices) {
+		list = invoices;
+		post();
+	}
+
+	/**
+	* Grab a invoice via a get method, or build one from scratch to use this method to update/add it.
+	*/
+	public void postInvoice(Invoice invoice) {
+		list = new LinkedList<Invoice>();
+		list.add(invoice);
+		post();
+	}
 
 }
