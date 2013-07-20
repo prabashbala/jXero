@@ -24,11 +24,11 @@ Or include a simple properties file alongside the jar for one line setup:
     contact.Name = "Acme Ltd";
     contact.EmailAddress = "acme@example.com";
 
-    xeroClient.postContact(contact);
+    xeroClient.getContactsEndpoint().post(contact);
 
 #### Grab a list of contacts
 
-	List<Contact> contacts = xeroClient.getContacts();
+	List<Contact> contacts = xeroClient.getContactsEndpoint().getContactsWhere("EmailAddress.endsWith(\"gmail.com\")");
 	for (Contact contact : contacts) {
 		System.out.println(contact.getEmailAddress());
 	}
