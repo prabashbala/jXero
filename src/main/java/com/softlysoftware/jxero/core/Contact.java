@@ -35,14 +35,14 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 public class Contact {
 
 	@XmlElement(name = "ContactID")
-	private String contactID;
-	public String getContactID(){return contactID;}
-	public void setContactID(String contactID){this.contactID = contactID;}
+	private String id;
+	public String getId(){return id;}
+	public void setId(String id){this.id = id;}
 
 	@XmlElement(name = "ContactNumber")
-	private String contactNumber;
-	public String getContactNumber(){return contactNumber;}
-	public void setContactNumber(String contactNumber){this.contactNumber = contactNumber;}
+	private String number;
+	public String getNumber(){return number;}
+	public void setNumber(String number){this.number = number;}
 
 	public enum Status {ACTIVE, DELETED};
 

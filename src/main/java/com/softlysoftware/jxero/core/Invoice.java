@@ -44,6 +44,16 @@ public class Invoice {
 
 	private static NumberFormat MONEY_FORMAT = new DecimalFormat("0.00");
 
+	@XmlElement(name = "InvoiceID")
+	private String id;
+	public String getId(){return id;}
+	public void setId(String id){this.id = id;}
+
+	@XmlElement(name = "InvoiceNumber")
+	private String number;
+	public String getNumber(){return number;}
+	public void setNumber(String number){this.number = number;}
+
 	public enum Type {ACCPAY, ACCREC};
 
 	@XmlElement(name = "Type")
@@ -76,11 +86,6 @@ public class Invoice {
 		catch (ParseException e) {throw new RuntimeException(e);}
 	}
 	public void setDueDate(Date dueDate){this.dueDate = DF.format(dueDate);}
-
-	@XmlElement(name = "InvoiceNumber")
-	private String invoiceNumber;
-	public String getInvoiceNumber(){return invoiceNumber;}
-	public void setInvoiceNumber(String invoiceNumber){this.invoiceNumber = invoiceNumber;}
 
 	@XmlElement(name = "Reference")
 	private String reference;
