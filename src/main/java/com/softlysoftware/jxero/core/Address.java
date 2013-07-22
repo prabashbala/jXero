@@ -69,6 +69,11 @@ public class Address {
 	public String getPostalCode(){return postalCode;}
 	public void setPostalCode(String postalCode){this.postalCode = postalCode;}
 
+	@XmlElement(name = "Region")
+	private String region;
+	public String getRegion(){return region;}
+	public void setRegion(String region){this.region = region;}
+
 	@XmlElement(name = "Country")
 	private String country;
 	public String getCountry(){return country;}
