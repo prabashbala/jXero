@@ -107,7 +107,7 @@ public class Invoice {
 	public String getCurrencyCode(){return currencyCode;}
 	public void setCurrencyCode(String currencyCode){this.currencyCode = currencyCode;}
 
-	public enum Status {DRAFT, SUBMITTED, AUTHORISED};
+	public enum Status {DRAFT, SUBMITTED, AUTHORISED, PAID};
 
 	@XmlElement(name = "Status")
 	private String status;
@@ -116,6 +116,7 @@ public class Invoice {
 		if (status.equals("DRAFT")) return Status.DRAFT;
 		if (status.equals("SUBMITTED")) return Status.SUBMITTED;
 		if (status.equals("AUTHORISED")) return Status.AUTHORISED;
+		if (status.equals("PAID")) return Status.PAID;
 		throw new RuntimeException("Bad status : " + status);
 	}
 	public void setStatus(Status status){this.status = status.toString();}
