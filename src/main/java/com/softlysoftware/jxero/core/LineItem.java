@@ -18,6 +18,7 @@
  */
 package com.softlysoftware.jxero.core;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -47,7 +48,8 @@ public class LineItem {
 		catch (ParseException e) {throw new RuntimeException(e);}
 	}
 	public void setQuantity(double quantity){this.quantity = QUANTITY_FORMAT.format(quantity);}
-
+  public void setQuantity(BigDecimal quantity){this.quantity = QUANTITY_FORMAT.format(quantity);}
+	
 	@XmlElement(name = "UnitAmount")
 	private String unitAmount;
 	public double getUnitAmount(){

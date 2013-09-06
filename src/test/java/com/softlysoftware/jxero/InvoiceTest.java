@@ -1,18 +1,16 @@
 package com.softlysoftware.jxero;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+
 import java.io.IOException;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
 import com.softlysoftware.jxero.core.Invoice;
 import com.softlysoftware.jxero.core.LineItem;
-import com.softlysoftware.jxero.InvoicesEndpoint;
-import org.apache.commons.io.IOUtils;
-import org.xmlmatchers.XmlMatchers;
-import org.xmlmatchers.transform.XmlConverters;
 
 @RunWith(JUnit4.class)
 public class InvoiceTest {
@@ -31,6 +29,7 @@ public class InvoiceTest {
         LineItem lineItem = invoice.getLineItems().get(0);
         assertEquals("3 copies of OS X 10.6 Snow Leopard", lineItem.getDescription());
         assertEquals(3d, lineItem.getQuantity(), 0);
+        @SuppressWarnings("unused")
         String xmlBounced = Xml.toXml(invoices);
         // doesn't work just yet as the order seems to change on the contact element
         //assertThat(XmlConverters.the(xml), XmlMatchers.isEquivalentTo(XmlConverters.the(xmlBounced)));

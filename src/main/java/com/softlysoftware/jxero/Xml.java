@@ -56,7 +56,8 @@ public class Xml {
 	/**
 	* The other end of the sausage machine.
 	*/
-	public static Wrapper fromXml(String xml, Class wrapperClass) {
+	@SuppressWarnings("unchecked")
+  public static Wrapper fromXml(String xml, @SuppressWarnings("rawtypes") Class wrapperClass) {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(wrapperClass);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();

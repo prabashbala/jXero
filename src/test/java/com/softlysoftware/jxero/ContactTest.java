@@ -2,16 +2,17 @@ package com.softlysoftware.jxero;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+
 import java.io.IOException;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import com.softlysoftware.jxero.core.Contact;
-import com.softlysoftware.jxero.ContactsEndpoint;
-import org.apache.commons.io.IOUtils;
 import org.xmlmatchers.XmlMatchers;
 import org.xmlmatchers.transform.XmlConverters;
+
+import com.softlysoftware.jxero.core.Contact;
 
 @RunWith(JUnit4.class)
 public class ContactTest {
