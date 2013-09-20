@@ -56,8 +56,8 @@ public class Response extends Wrapper {
 	private ContactsEndpoint contactsEndpoint;
 
 	@XmlElement(name = "Invoices")
-	private InvoicesEndpoint invoicesEndPoint;
 	public InvoicesEndpoint getInvoicesEndpoint(){return invoicesEndPoint;}
 	public void setInvoicesEndpoint(InvoicesEndpoint invoicesEndPoint){this.invoicesEndPoint = invoicesEndPoint;}
+	private InvoicesEndpoint invoicesEndPoint;
 
 }
