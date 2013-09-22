@@ -60,8 +60,9 @@ public class Invoice {
 	private String type;
 
 	@XmlElement(name = "AmountDue")
-	private BigDecimal amountDue;
-	public BigDecimal getAmountDue() {return amountDue;}
+	private double amountDue;
+	public double getAmountDue() {return amountDue;}
+	public void setAmountDue(double amountDue) {this.amountDue = amountDue;}
 	public void setAmountDue(BigDecimal amountDue) {this.amountDue = amountDue;}
 
 	public Type getType() {
