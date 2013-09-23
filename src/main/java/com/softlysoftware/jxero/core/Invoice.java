@@ -60,10 +60,13 @@ public class Invoice {
 	private String type;
 
 	@XmlElement(name = "AmountDue")
-	private double amountDue;
-	public double getAmountDue() {return amountDue;}
-	public void setAmountDue(double amountDue) {this.amountDue = amountDue;}
-	public void setAmountDue(BigDecimal amountDue) {this.amountDue = amountDue;}
+	private String amountDue;
+	public double getAmountDue(){
+		try {return MONEY_FORMAT.parse(amountDue).doubleValue();}
+		catch (ParseException e) {throw new RuntimeException(e);}
+	}
+	public void setAmountDue(double amountDue){this.amountDue = MONEY_FORMAT.format(amountDue);}
+	public void setAmountDue(BigDecimal amountDue){this.amountDue = MONEY_FORMAT.format(amountDue);}
 
 	public Type getType() {
 		if (type == null) return null;

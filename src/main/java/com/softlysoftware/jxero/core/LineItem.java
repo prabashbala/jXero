@@ -31,7 +31,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.NONE)
 public class LineItem {
 
-
 	private static NumberFormat MONEY_FORMAT = new DecimalFormat("0.00");
 
 	private static NumberFormat QUANTITY_FORMAT = new DecimalFormat("0.0000");
@@ -48,7 +47,7 @@ public class LineItem {
 		catch (ParseException e) {throw new RuntimeException(e);}
 	}
 	public void setQuantity(double quantity){this.quantity = QUANTITY_FORMAT.format(quantity);}
-  public void setQuantity(BigDecimal quantity){this.quantity = QUANTITY_FORMAT.format(quantity);}
+	public void setQuantity(BigDecimal quantity){this.quantity = QUANTITY_FORMAT.format(quantity);}
 	
 	@XmlElement(name = "UnitAmount")
 	private String unitAmount;
