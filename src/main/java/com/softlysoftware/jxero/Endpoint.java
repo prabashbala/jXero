@@ -27,7 +27,7 @@ import net.oauth.OAuthException;
 import net.oauth.OAuthMessage;
 import net.oauth.OAuth;
 import net.oauth.client.OAuthClient;
-import net.oauth.client.httpclient3.HttpClient3;
+import net.oauth.client.httpclient4.HttpClient4;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -48,7 +48,7 @@ public abstract class Endpoint extends Wrapper {
 
 	private String invoke(Method method, String identifier, List<OAuth.Parameter> params) {
 		try {
-			OAuthClient oAuthClient = new OAuthClient(new HttpClient3());
+			OAuthClient oAuthClient = new OAuthClient(new HttpClient4());
 			String url = BASE + getRootElementName() + "/";
 			if (identifier != null) url = url + identifier;
 			if (params == null) params = OAuth.newList();
@@ -58,7 +58,7 @@ public abstract class Endpoint extends Wrapper {
 				log.trace(param.getKey() + " : " + param.getValue());
 			}
 			log.trace("--------------------------------");
-			OAuthMessage message= oAuthClient.invoke(xeroClient.getOAuthAccessor(), method.toString(), url, params);
+			OAuthMessage message = oAuthClient.invoke(xeroClient.getOAuthAccessor(), method.toString(), url, params);
 			String response = message.readBodyAsString();
 			log.trace("Reponse:");
 			log.trace("--------------------------------");
