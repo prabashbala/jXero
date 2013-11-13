@@ -3,7 +3,7 @@ jXero
 
 A simple Java library for the [Xero API](http://developer.xero.com/documentation/api/api-overview/).
 
-[Download latest version](http://softlysoftware.com/jxero/jxero-latest.zip)
+[Download latest version](http://keithharris.org/jxero/jxero-latest.zip)
 
 #### Easy to set up
 
