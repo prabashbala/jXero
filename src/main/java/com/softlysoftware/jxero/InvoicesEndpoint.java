@@ -89,6 +89,13 @@ public class InvoicesEndpoint extends Endpoint {
 	}
 
 	/**
+	* Once you have a good invoice object, you can use this to get the PDF bytes.
+	*/
+	public byte[] getPdf(Invoice invoice) {
+		return getPdf(invoice.getId(), null);
+	}
+
+	/**
 	* Either get a collection of Invoice objects, or build from scratch. Then call this method to update/add them to your Xero data.
 	*/
 	public void post(List<Invoice> invoices) {

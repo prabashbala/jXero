@@ -20,6 +20,7 @@ package com.softlysoftware.jxero;
 
 import java.util.List;
 import java.io.IOException;
+import java.io.InputStream;
 import com.softlysoftware.jxero.Xml;
 import com.softlysoftware.jxero.XeroClient;
 import java.net.URISyntaxException;
@@ -28,6 +29,7 @@ import net.oauth.OAuthMessage;
 import net.oauth.OAuth;
 import net.oauth.client.OAuthClient;
 import net.oauth.client.httpclient4.HttpClient4;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -46,9 +48,9 @@ public abstract class Endpoint extends Wrapper {
 
 	public abstract String getRootElementName();
 
-	private String invoke(Method method, String identifier, List<OAuth.Parameter> params) {
+	private OAuthMessage invoke(Method method, String identifier, List<OAuth.Parameter> params, HttpClient4 httpClient) {
 		try {
-			OAuthClient oAuthClient = new OAuthClient(new HttpClient4());
+			OAuthClient oAuthClient = new OAuthClient(httpClient);
 			String url = BASE + getRootElementName() + "/";
 			if (identifier != null) url = url + identifier;
 			if (params == null) params = OAuth.newList();
@@ -58,13 +60,7 @@ public abstract class Endpoint extends Wrapper {
 				log.trace(param.getKey() + " : " + param.getValue());
 			}
 			log.trace("--------------------------------");
-			OAuthMessage message = oAuthClient.invoke(xeroClient.getOAuthAccessor(), method.toString(), url, params);
-			String response = message.readBodyAsString();
-			log.trace("Reponse:");
-			log.trace("--------------------------------");
-			log.trace(response);
-			log.trace("--------------------------------");
-			return response;
+			return oAuthClient.invoke(xeroClient.getOAuthAccessor(), method.toString(), url, params);
 		}
 		catch (URISyntaxException urise) {
 			throw new RuntimeException("Should not happen?", urise);
@@ -79,22 +75,41 @@ public abstract class Endpoint extends Wrapper {
 	}
 
 	protected Response get(String identifier, List<OAuth.Parameter> params) {
-		String xml = invoke(Method.GET, identifier, params);
-		return (Response)Xml.fromXml(xml, Response.class);
+		try {
+			OAuthMessage message = invoke(Method.GET, identifier, params, new HttpClient4());
+			String xml = message.readBodyAsString();
+			return (Response)Xml.fromXml(xml, Response.class);
+		}
+		catch (IOException ioe) {
+			throw new RuntimeException("Something went wrong connecting to the service.", ioe);
+		}
 	}
 
 	protected Response getWhere(String where) {
 		return get(null, OAuth.newList("where", where));
 	}
 
+	protected byte[] getPdf(String identifier, List<OAuth.Parameter> params) {
+		try {
+			OAuthMessage message = invoke(Method.GET, identifier, params, new HeaderSettableHttpClient("Accept", "application/pdf"));
+			InputStream in = message.getBodyAsStream();
+			byte[] build = IOUtils.toByteArray(in);
+			in.close();
+			return build;
+		}
+		catch (IOException ioe) {
+			throw new RuntimeException("Something went wrong connecting to the service.", ioe);
+		}
+	}
+
 	protected void post() {
 		String xml = Xml.toXml(this);
-		invoke(Method.POST, null, OAuth.newList("xml", xml));
+		invoke(Method.POST, null, OAuth.newList("xml", xml), new HttpClient4());
 	}
 
 	protected void put() {
 		String xml = Xml.toXml(this);
-		invoke(Method.PUT, null, OAuth.newList("xml", xml));
+		invoke(Method.PUT, null, OAuth.newList("xml", xml), new HttpClient4());
 	}
 
 }
