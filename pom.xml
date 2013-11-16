@@ -40,6 +40,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <executions>
                     <execution>
                         <id>default-testCompile</id>
@@ -73,7 +74,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptor>src/assembly/bin.xml</descriptor>
-                    <finalName>jxero-${pom.version}</finalName>
+                    <finalName>jxero-${project.version}</finalName>
                 </configuration>
                 <executions>
                     <execution>
