@@ -43,45 +43,54 @@ public class Address {
 	private String addressLine1;
 	public String getAddressLine1(){return addressLine1;}
 	public void setAddressLine1(String addressLine1){this.addressLine1 = addressLine1;}
+	public boolean getHasAddressLine1() {return addressLine1 != null && addressLine1.length() > 0;}
 
 	@XmlElement(name = "AddressLine2")
 	private String addressline2;
 	public String getAddressLine2(){return addressline2;}
 	public void setAddressLine2(String addressline2){this.addressline2 = addressline2;}
+	public boolean getHasAddressLine2() {return addressline2 != null && addressline2.length() > 0;}
 
 	@XmlElement(name = "AddressLine3")
 	private String addressLine3;
 	public String getAddressLine3(){return addressLine3;}
 	public void setAddressLine3(String addressLine3){this.addressLine3 = addressLine3;}
+	public boolean getHasAddressLine3() {return addressLine3 != null && addressLine3.length() > 0;}
 
 	@XmlElement(name = "AddressLine4")
 	private String addressLine4;
 	public String getAddressLine4(){return addressLine4;}
 	public void setAddressLine4(String addressLine4){this.addressLine4 = addressLine4;}
+	public boolean getHasAddressLine4() {return addressLine4 != null && addressLine4.length() > 0;}
 
 	@XmlElement(name = "City")
 	private String city;
 	public String getCity(){return city;}
 	public void setCity(String city){this.city = city;}
+	public boolean getHasCity() {return city != null && city.length() > 0;}
 
 	@XmlElement(name = "PostalCode")
 	private String postalCode;
 	public String getPostalCode(){return postalCode;}
 	public void setPostalCode(String postalCode){this.postalCode = postalCode;}
+	public boolean getHasPostalCode() {return postalCode != null && postalCode.length() > 0;}
 
 	@XmlElement(name = "Region")
 	private String region;
 	public String getRegion(){return region;}
 	public void setRegion(String region){this.region = region;}
+	public boolean getHasRegion() {return region != null && region.length() > 0;}
 
 	@XmlElement(name = "Country")
 	private String country;
 	public String getCountry(){return country;}
 	public void setCountry(String country){this.country = country;}
+	public boolean getHasCountry() {return country != null && country.length() > 0;}
 
 	@XmlElement(name = "AttentionTo")
 	private String attentionTo;
 	public String getAttentionTo(){return attentionTo;}
 	public void setAttentionTo(String attentionTo){this.attentionTo = attentionTo;}
+	public boolean getHasAttentionTo() {return attentionTo != null && attentionTo.length() > 0;}
 
 }

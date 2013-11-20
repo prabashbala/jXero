@@ -60,36 +60,43 @@ public class Contact {
 	private String name;
 	public String getName(){return name;}
 	public void setName(String name){this.name = name;}
+	public boolean getHasName() {return name != null && name.length() > 0;}
 
 	@XmlElement(name = "FirstName")
 	private String firstName;
 	public String getFirstName(){return firstName;}
 	public void setFirstName(String firstName){this.firstName = firstName;}
+	public boolean getHasFirstName() {return firstName != null && firstName.length() > 0;}
 
 	@XmlElement(name = "LastName")
 	private String lastName;
 	public String getLastName(){return lastName;}
 	public void setLastName(String lastName){this.lastName = lastName;}
+	public boolean getHasLastName() {return lastName != null && lastName.length() > 0;}
 
 	@XmlElement(name = "EmailAddress")
 	private String emailAddress;
 	public String getEmailAddress(){return emailAddress;}
 	public void setEmailAddress(String emailAddress){this.emailAddress = emailAddress;}
+	public boolean getHasEmailAddress() {return emailAddress != null && emailAddress.length() > 0;}
 
 	@XmlElement(name = "SkypeUserName")
 	private String skypeUserName;
 	public String getSkypeUserName(){return skypeUserName;}
 	public void setSkypeUserName(String skypeUserName){this.skypeUserName = skypeUserName;}
+	public boolean getHasSkypeUserName() {return skypeUserName != null && skypeUserName.length() > 0;}
 
 	@XmlElement(name = "BankAccountDetails")
 	private String bankAccountDetails;
 	public String getBankAccountDetails(){return bankAccountDetails;}
 	public void setBankAccountDetails(String bankAccountDetails){this.bankAccountDetails = bankAccountDetails;}
+	public boolean getHasBankAccountDetails() {return bankAccountDetails != null && bankAccountDetails.length() > 0;}
 
 	@XmlElement(name = "TaxNumber")
 	private String taxNumber;
 	public String getTaxNumber(){return taxNumber;}
 	public void setTaxNumber(String taxNumber){this.taxNumber = taxNumber;}
+	public boolean getHasTaxNumber() {return taxNumber != null && taxNumber.length() > 0;}
 
 	@XmlElement(name = "AccountsReceivableTaxType")
 	private String accountsReceivableTypeType;
