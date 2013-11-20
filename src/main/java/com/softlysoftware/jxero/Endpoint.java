@@ -21,6 +21,7 @@ package com.softlysoftware.jxero;
 import java.util.List;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import com.softlysoftware.jxero.Xml;
 import com.softlysoftware.jxero.XeroClient;
 import java.net.URISyntaxException;
@@ -48,7 +49,7 @@ public abstract class Endpoint extends Wrapper {
 
 	public abstract String getRootElementName();
 
-	private OAuthMessage invoke(Method method, String identifier, List<OAuth.Parameter> params, HttpClient4 httpClient) {
+	private byte[] invoke(Method method, String identifier, List<OAuth.Parameter> params, HttpClient4 httpClient) {
 		try {
 			OAuthClient oAuthClient = new OAuthClient(httpClient);
 			String url = BASE + getRootElementName() + "/";
@@ -60,7 +61,11 @@ public abstract class Endpoint extends Wrapper {
 				log.trace(param.getKey() + " : " + param.getValue());
 			}
 			log.trace("--------------------------------");
-			return oAuthClient.invoke(xeroClient.getOAuthAccessor(), method.toString(), url, params);
+			OAuthMessage message = oAuthClient.invoke(xeroClient.getOAuthAccessor(), method.toString(), url, params);
+			InputStream in = message.getBodyAsStream();
+			byte[] build = IOUtils.toByteArray(in);
+			in.close();
+			return build;
 		}
 		catch (URISyntaxException urise) {
 			throw new RuntimeException("Should not happen?", urise);
@@ -76,13 +81,11 @@ public abstract class Endpoint extends Wrapper {
 
 	protected Response get(String identifier, List<OAuth.Parameter> params) {
 		try {
-			OAuthMessage message = invoke(Method.GET, identifier, params, new HttpClient4());
-			String xml = message.readBodyAsString();
+			byte[] message = invoke(Method.GET, identifier, params, new HttpClient4());
+			String xml = new String(message, "UTF-8");
 			return (Response)Xml.fromXml(xml, Response.class);
 		}
-		catch (IOException ioe) {
-			throw new RuntimeException("Something went wrong connecting to the service.", ioe);
-		}
+		catch (UnsupportedEncodingException uee) {throw new RuntimeException(uee);}
 	}
 
 	protected Response getWhere(String where) {
@@ -90,16 +93,7 @@ public abstract class Endpoint extends Wrapper {
 	}
 
 	protected byte[] getPdf(String identifier, List<OAuth.Parameter> params) {
-		try {
-			OAuthMessage message = invoke(Method.GET, identifier, params, new HeaderSettableHttpClient("Accept", "application/pdf"));
-			InputStream in = message.getBodyAsStream();
-			byte[] build = IOUtils.toByteArray(in);
-			in.close();
-			return build;
-		}
-		catch (IOException ioe) {
-			throw new RuntimeException("Something went wrong connecting to the service.", ioe);
-		}
+		return  invoke(Method.GET, identifier, params, new HeaderSettableHttpClient("Accept", "application/pdf"));
 	}
 
 	protected void post() {
