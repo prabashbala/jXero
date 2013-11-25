@@ -113,6 +113,20 @@ public class Contact {
 	private List<Address> addresses = new LinkedList<Address>();
 	public List<Address> getAddresses() {return addresses;}
 	public void setAddresses(List<Address> addresses) {this.addresses = addresses;}
+	
+	public Address getPOBoxAddress() {
+		for (Address address : getAddresses()) {
+			if (address.getType().equals(Address.Type.POBOX)) return address;
+		}
+		return null;
+	}
+
+	public Address getStreetAddress() {
+		for (Address address : getAddresses()) {
+			if (address.getType().equals(Address.Type.STREET)) return address;
+		}
+		return null;
+	}
 
 	@XmlElementWrapper(name = "Phones")
 	@XmlElement(name = "Phone")
