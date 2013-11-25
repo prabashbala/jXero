@@ -19,14 +19,9 @@
 package com.softlysoftware.jxero.core;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -37,12 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Invoice")
 @XmlAccessorType(XmlAccessType.NONE)
 public class Invoice {
-
-	// TODO - Parse using the Xero Account's timezone
-	private static SimpleDateFormat DF = new SimpleDateFormat("yyyy-MM-dd'T00:00:00'");
-	static {DF.setTimeZone(TimeZone.getTimeZone("UTC"));}
-
-	private static NumberFormat MONEY_FORMAT = new DecimalFormat("0.00");
 
 	@XmlElement(name = "InvoiceID")
 	private String id;
@@ -61,12 +50,9 @@ public class Invoice {
 
 	@XmlElement(name = "AmountDue")
 	private String amountDue;
-	public double getAmountDue(){
-		try {return MONEY_FORMAT.parse(amountDue).doubleValue();}
-		catch (ParseException e) {throw new RuntimeException(e);}
-	}
-	public void setAmountDue(double amountDue){this.amountDue = MONEY_FORMAT.format(amountDue);}
-	public void setAmountDue(BigDecimal amountDue){this.amountDue = MONEY_FORMAT.format(amountDue);}
+	public double getAmountDue(){return Formats.parseMoney(amountDue);}
+	public void setAmountDue(double amountDue){this.amountDue = Formats.formatMoney(amountDue);}
+	public void setAmountDue(BigDecimal amountDue){this.amountDue = Formats.formatMoney(amountDue);}
 
 	public Type getType() {
 		if (type == null) return null;
@@ -83,19 +69,13 @@ public class Invoice {
 
 	@XmlElement(name = "Date")
 	private String date;
-	public Date getDate(){
-		try {return DF.parse(date);}
-		catch (ParseException e) {throw new RuntimeException(e);}
-	}
-	public void setDate(Date date){this.date = DF.format(date);}
+	public Date getDate(){return Formats.parseDate(date);}
+	public void setDate(Date date){this.date = Formats.formatDate(date);}
 
 	@XmlElement(name = "DueDate")
 	private String dueDate;
-	public Date getDueDate(){
-		try {return DF.parse(dueDate);}
-		catch (ParseException e) {throw new RuntimeException(e);}
-	}
-	public void setDueDate(Date dueDate){this.dueDate = DF.format(dueDate);}
+	public Date getDueDate(){return Formats.parseDate(dueDate);}
+	public void setDueDate(Date dueDate){this.dueDate = Formats.formatDate(dueDate);}
 
 	@XmlElement(name = "Reference")
 	private String reference;
@@ -138,27 +118,18 @@ public class Invoice {
 
 	@XmlElement(name = "SubTotal")
 	private String subTotal;
-	public double getSubTotal(){
-		try {return MONEY_FORMAT.parse(subTotal).doubleValue();}
-		catch (ParseException e) {throw new RuntimeException(e);}
-	}
-	public void setSubTotal(double subTotal){this.subTotal = MONEY_FORMAT.format(subTotal);} 
+	public double getSubTotal(){return Formats.parseMoney(subTotal);}
+	public void setSubTotal(double subTotal){this.amountDue = Formats.formatMoney(subTotal);}
 
 	@XmlElement(name = "TotalTax")
 	private String totalTax;
-	public double getTotalTax(){
-		try {return MONEY_FORMAT.parse(totalTax).doubleValue();}
-		catch (ParseException e) {throw new RuntimeException(e);}
-	}
-	public void setTotalTax(double totalTax){this.totalTax = MONEY_FORMAT.format(totalTax);} 
+	public double getTotalTax(){return Formats.parseMoney(totalTax);}
+	public void setTotalTax(double totalTax){this.amountDue = Formats.formatMoney(totalTax);} 
 
 	@XmlElement(name = "Total")
 	private String total;
-	public double getTotal(){
-		try {return MONEY_FORMAT.parse(total).doubleValue();}
-		catch (ParseException e) {throw new RuntimeException(e);}
-	}
-	public void setTotal(double total){this.total = MONEY_FORMAT.format(total);}
+	public double getTotal(){return Formats.parseMoney(total);}
+	public void setTotal(double total){this.amountDue = Formats.formatMoney(total);}
 
 	@XmlElementWrapper(name = "LineItems")
 	@XmlElement(name = "LineItem")

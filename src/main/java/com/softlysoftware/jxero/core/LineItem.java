@@ -19,9 +19,6 @@
 package com.softlysoftware.jxero.core;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -31,10 +28,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.NONE)
 public class LineItem {
 
-	private static NumberFormat MONEY_FORMAT = new DecimalFormat("0.00");
-
-	private static NumberFormat QUANTITY_FORMAT = new DecimalFormat("0.0000");
-
 	@XmlElement(name = "Description")
 	private String description;
 	public String getDescription(){return description;}
@@ -42,20 +35,14 @@ public class LineItem {
 
 	@XmlElement(name = "Quantity")
 	private String quantity;
-	public double getQuantity(){
-		try {return QUANTITY_FORMAT.parse(quantity).doubleValue();}
-		catch (ParseException e) {throw new RuntimeException(e);}
-	}
-	public void setQuantity(double quantity){this.quantity = QUANTITY_FORMAT.format(quantity);}
-	public void setQuantity(BigDecimal quantity){this.quantity = QUANTITY_FORMAT.format(quantity);}
+	public double getQuantity(){return Formats.parseQuantity(quantity);}
+	public void setQuantity(double quantity){this.quantity = Formats.formatQuantity(quantity);}
+	public void setQuantity(BigDecimal quantity){this.quantity = Formats.formatQuantity(quantity);}
 	
 	@XmlElement(name = "UnitAmount")
 	private String unitAmount;
-	public double getUnitAmount(){
-		try {return MONEY_FORMAT.parse(unitAmount).doubleValue();}
-		catch (ParseException e) {throw new RuntimeException(e);}
-	}
-	public void setUnitAmount(double unitAmount){this.unitAmount = MONEY_FORMAT.format(unitAmount);}
+	public double getUnitAmount(){return Formats.parseMoney(unitAmount);}
+	public void setUnitAmount(double unitAmount){this.unitAmount = Formats.formatMoney(unitAmount);}
 
 	@XmlElement(name = "TaxType")
 	private String taxType;
@@ -64,19 +51,13 @@ public class LineItem {
 
 	@XmlElement(name = "TaxAmount")
 	private String taxAmount;
-	public double getTaxAmount(){
-		try {return MONEY_FORMAT.parse(taxAmount).doubleValue();}
-		catch (ParseException e) {throw new RuntimeException(e);}
-	}
-	public void setTaxAmount(double taxAmount){this.taxAmount = MONEY_FORMAT.format(taxAmount);}
+	public double getTaxAmount(){return Formats.parseMoney(taxAmount);}
+	public void setTaxAmount(double taxAmount){this.taxAmount = Formats.formatMoney(taxAmount);}
 
 	@XmlElement(name = "LineAmount")
 	private String lineAmount;
-	public double getLineAmount(){
-		try {return MONEY_FORMAT.parse(lineAmount).doubleValue();}
-		catch (ParseException e) {throw new RuntimeException(e);}
-	}
-	public void setLineAmount(double lineAmount){this.lineAmount = MONEY_FORMAT.format(lineAmount);}
+	public double getLineAmount(){return Formats.parseMoney(lineAmount);}
+	public void setLineAmount(double lineAmount){this.lineAmount = Formats.formatMoney(lineAmount);}
 
 	@XmlElement(name = "AccountCode")
 	private String accountCode;
