@@ -21,7 +21,6 @@ package com.softlysoftware.jxero;
 import java.util.List;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import com.softlysoftware.jxero.Xml;
 import com.softlysoftware.jxero.XeroClient;
 import java.net.URISyntaxException;
@@ -80,12 +79,7 @@ public abstract class Endpoint extends Wrapper {
 	}
 
 	protected Response get(String identifier, List<OAuth.Parameter> params) {
-		try {
-			byte[] message = invoke(Method.GET, identifier, params, new HttpClient4());
-			String xml = new String(message, "UTF-8");
-			return (Response)Xml.fromXml(xml, Response.class);
-		}
-		catch (UnsupportedEncodingException uee) {throw new RuntimeException(uee);}
+		return Response.getResponse(invoke(Method.GET, identifier, params, new HttpClient4()));
 	}
 
 	protected Response getWhere(String where) {
@@ -96,14 +90,14 @@ public abstract class Endpoint extends Wrapper {
 		return  invoke(Method.GET, identifier, params, new HeaderSettableHttpClient("Accept", "application/pdf"));
 	}
 
-	protected void post() {
+	protected Response post() {
 		String xml = Xml.toXml(this);
-		invoke(Method.POST, null, OAuth.newList("xml", xml), new HttpClient4());
+		return Response.getResponse(invoke(Method.POST, null, OAuth.newList("xml", xml), new HttpClient4()));
 	}
 
-	protected void put() {
+	protected Response put() {
 		String xml = Xml.toXml(this);
-		invoke(Method.PUT, null, OAuth.newList("xml", xml), new HttpClient4());
+		return Response.getResponse(invoke(Method.PUT, null, OAuth.newList("xml", xml), new HttpClient4()));
 	}
 
 }

@@ -97,7 +97,7 @@ public class Invoice {
 	public String getCurrencyCode(){return currencyCode;}
 	public void setCurrencyCode(String currencyCode){this.currencyCode = currencyCode;}
 
-	public enum Status {DRAFT, SUBMITTED, AUTHORISED, PAID};
+	public enum Status {DRAFT, SUBMITTED, AUTHORISED, PAID, VOIDED};
 
 	@XmlElement(name = "Status")
 	private String status;
@@ -107,6 +107,7 @@ public class Invoice {
 		if (status.equals("SUBMITTED")) return Status.SUBMITTED;
 		if (status.equals("AUTHORISED")) return Status.AUTHORISED;
 		if (status.equals("PAID")) return Status.PAID;
+		if (status.equals("VOIDED")) return Status.VOIDED;
 		throw new RuntimeException("Bad status : " + status);
 	}
 	public void setStatus(Status status){this.status = status.toString();}
@@ -136,5 +137,11 @@ public class Invoice {
 	private List<LineItem> lineItems = new LinkedList<LineItem>();
 	public List<LineItem> getLineItems(){return lineItems;}
 	public void setLineItems(List<LineItem> lineItems){this.lineItems = lineItems;}
+
+	@XmlElementWrapper(name = "Payments")
+	@XmlElement(name = "Payment")
+	private List<Payment> payments = new LinkedList<Payment>();
+	public List<Payment> getPayments() {return payments;}
+	public void setPayments(List<Payment> payments) {this.payments = payments;}
 
 }

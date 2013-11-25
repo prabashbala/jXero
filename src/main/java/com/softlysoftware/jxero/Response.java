@@ -18,6 +18,7 @@
  */
 package com.softlysoftware.jxero;
 
+import java.io.UnsupportedEncodingException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -56,8 +57,21 @@ public class Response extends Wrapper {
 	private ContactsEndpoint contactsEndpoint;
 
 	@XmlElement(name = "Invoices")
-	public InvoicesEndpoint getInvoicesEndpoint(){return invoicesEndPoint;}
-	public void setInvoicesEndpoint(InvoicesEndpoint invoicesEndPoint){this.invoicesEndPoint = invoicesEndPoint;}
-	private InvoicesEndpoint invoicesEndPoint;
+	public InvoicesEndpoint getInvoicesEndpoint(){return invoicesEndpoint;}
+	public void setInvoicesEndpoint(InvoicesEndpoint invoicesEndpoint){this.invoicesEndpoint = invoicesEndpoint;}
+	private InvoicesEndpoint invoicesEndpoint;
+
+	@XmlElement(name = "Payments")
+	public PaymentsEndpoint getPaymentsEndpoint(){return paymentsEndpoint;}
+	public void setPaymentsEndpoint(PaymentsEndpoint paymentsEndpoint){this.paymentsEndpoint = paymentsEndpoint;}
+	private PaymentsEndpoint paymentsEndpoint;
+
+	public static Response getResponse(byte[] message) {
+		try {
+			String xml = new String(message, "UTF-8");
+			return (Response)Xml.fromXml(xml, Response.class);
+		}
+		catch (UnsupportedEncodingException uee) {throw new RuntimeException(uee);}
+	}
 
 }

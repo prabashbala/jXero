@@ -98,18 +98,18 @@ public class ContactsEndpoint extends Endpoint {
 	/**
 	* Either get a collection of Contact objects, or build from scratch. Then call this method to update/add them to your Xero data.
 	*/
-	public void post(List<Contact> contacts) {
+	public List<Contact> post(List<Contact> contacts) {
 		list = contacts;
-		post();
+		return post().getContactsEndpoint().getList();
 	}
 
 	/**
 	* Grab a contact via a get method, or build one from scratch to use this method to update/add it.
 	*/
-	public void post(Contact contact) {
+	public Contact post(Contact contact) {
 		list = new LinkedList<Contact>();
 		list.add(contact);
-		post();
+		return post().getContactsEndpoint().getList().get(0);
 	}
 
 }

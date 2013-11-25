@@ -29,7 +29,7 @@ import com.softlysoftware.jxero.core.Invoice;
 import com.softlysoftware.jxero.XeroClient;
 
 /**
-* A simple wrapper for the list of Contact objects, to give the correct structure to the XML files.
+* A simple wrapper for the list of Invoice objects, to give the correct structure to the XML files.
 */
 @XmlRootElement(name = "Invoices")
 @XmlAccessorType(XmlAccessType.NONE)
@@ -98,18 +98,18 @@ public class InvoicesEndpoint extends Endpoint {
 	/**
 	* Either get a collection of Invoice objects, or build from scratch. Then call this method to update/add them to your Xero data.
 	*/
-	public void post(List<Invoice> invoices) {
+	public List<Invoice> post(List<Invoice> invoices) {
 		list = invoices;
-		post();
+		return post().getInvoicesEndpoint().getList();
 	}
 
 	/**
 	* Grab a invoice via a get method, or build one from scratch to use this method to update/add it.
 	*/
-	public void post(Invoice invoice) {
+	public Invoice post(Invoice invoice) {
 		list = new LinkedList<Invoice>();
 		list.add(invoice);
-		post();
+		return post().getInvoicesEndpoint().getList().get(0);
 	}
 
 }
