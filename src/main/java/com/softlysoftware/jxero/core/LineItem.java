@@ -59,6 +59,11 @@ public class LineItem {
 	public double getLineAmount(){return Formats.parseMoney(lineAmount);}
 	public void setLineAmount(double lineAmount){this.lineAmount = Formats.formatMoney(lineAmount);}
 
+	@XmlElement(name = "DiscountRate")
+	private String discountRate;
+	public double getDiscountRate(){return Formats.parseQuantity(discountRate);}
+	public void setDiscountRate(double discountRate){this.discountRate = Formats.formatQuantity(discountRate);}
+
 	@XmlElement(name = "AccountCode")
 	private String accountCode;
 	public String getAccountCode(){return accountCode;}
