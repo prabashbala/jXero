@@ -34,6 +34,7 @@
                             <files>
                                 <file>${user.home}/.jxero.properties</file>
                             </files>
+                            <quiet>true</quiet>
                         </configuration>
                     </execution>
                 </executions>
@@ -101,7 +102,8 @@
               <version>1.0-beta-3</version>
               <configuration>
                 <fromFile>${project.build.directory}/${project.build.finalName}-bin.zip</fromFile>
-                <url>${jxero.latest.upload.location}/jxero-latest.zip</url>
+                <url>${jxero.latest.upload.location}</url>
+                <toFile>jxero-latest.zip</toFile>
               </configuration>
               <executions>
                 <execution>
