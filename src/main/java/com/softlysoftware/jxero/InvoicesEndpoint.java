@@ -82,7 +82,8 @@ public class InvoicesEndpoint extends Endpoint {
 	}
 
 	/**
-	* This is the unqiue identifier on your side.
+	* This is the unqiue identifier on your side. Note that these seem to come back with out the subordinate objects, so you
+	* probably want to follow up by grabbing the id and using that for a separate call.
 	*/
 	public Invoice getByNumber(String number) {
 		return getInvoiceWhere("InvoiceNumber =  \"" + number + "\"");

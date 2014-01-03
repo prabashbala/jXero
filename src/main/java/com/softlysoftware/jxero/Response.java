@@ -69,6 +69,7 @@ public class Response extends Wrapper {
 	public static Response getResponse(byte[] message) {
 		try {
 			String xml = new String(message, "UTF-8");
+			log.trace("Parsing XML : \n" xml);
 			return (Response)Xml.fromXml(xml, Response.class);
 		}
 		catch (UnsupportedEncodingException uee) {throw new RuntimeException(uee);}
