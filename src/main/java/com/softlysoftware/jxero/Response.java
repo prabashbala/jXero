@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
 * Corresponds to the root element on the XML repsonses to API calls.
@@ -30,6 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Response")
 @XmlAccessorType(XmlAccessType.NONE)
 public class Response extends Wrapper {
+
+	private static Log log = LogFactory.getLog("jxero.response");
 
 	@XmlElement(name = "Id")
 	public String getId() {return id;}
@@ -69,7 +73,7 @@ public class Response extends Wrapper {
 	public static Response getResponse(byte[] message) {
 		try {
 			String xml = new String(message, "UTF-8");
-			log.trace("Parsing XML : \n" xml);
+			log.trace("Parsing XML : \n" + xml);
 			return (Response)Xml.fromXml(xml, Response.class);
 		}
 		catch (UnsupportedEncodingException uee) {throw new RuntimeException(uee);}

@@ -38,7 +38,7 @@ import org.apache.commons.logging.LogFactory;
 */
 public abstract class Endpoint extends Wrapper {
 
-	private static Log log = LogFactory.getLog("xero.endpoint");
+	private static Log log = LogFactory.getLog("jxero.endpoint");
 
 	private static String BASE =  "https://api.xero.com/api.xro/2.0/";
 
